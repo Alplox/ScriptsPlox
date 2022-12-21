@@ -4,7 +4,7 @@ chcp 65001
 REM Script Name   : ScriptsPlox.bat
 REM Author        : Alplox
 REM Created       : 05-12-2022
-REM Version       : v0.01
+REM Version       : v0.02
 REM Repository    : https://github.com/Alplox/ScriptsPlox
 REM Description   : Batch que contiene utilidades para resolución de problemas comunes en equipos que veo en mi trabajo.
 
@@ -87,7 +87,7 @@ if '%errorlevel%' NEQ '0' (
 
 
 
-:inicio
+:menu-Inicio
 cls
 mode con: cols=90 lines=45
 :::                          ┌───────┐   ╔════════════════════╗
@@ -96,7 +96,7 @@ mode con: cols=90 lines=45
 :::       ╔══════════════╗   │[■■■■]o│   ║       Alplox       ║
 :::       ║              ║   ├───────┤   ║                    ║
 :::       ║   Scripts y  ║   │       │   ╚════════╤══╤══════o═╝
-:::       ║ Herramientas ║   │ v0.01 │─────┘  ____│__│____
+:::       ║ Herramientas ║   │ v0.02 │─────┘  ____│__│____
 :::       ║              ║   │       │─┐     /____________\
 :::       ╚══════════════╝   └───────┘ │   ________________
 :::      /::::::::::::::::\            └──/::::::::::::::::\   /T\
@@ -109,14 +109,14 @@ echo.
 echo             Bienvenido al menú de scripts:
 echo.
 echo             [1] Ver datos PC (dominio, hostname, serial, mac)
-echo             [2] Ver teles
-echo             [ ] ?
+echo             [2] Optimización-Reparación-Análisis disco duro
+echo             [3] Reparar perfil temporal
 echo             [4] Soluciones problemas directivas dominio
-echo             [5] Optimización-Reparación-Análisis disco duro
-echo             [6] Reparar perfil temporal
-echo             [7] Buscar drivers desde sitios oficiales
+echo             [5] Limpiar cola impresion-Spooler
+echo             [6] Buscar drivers desde sitios oficiales
 echo             [ ] 
-echo             [ ] 
+echo             [8] Ver teles
+echo             [ ] ?
 echo             [0] Reiniciar en inicio avanzado
 echo          __________________________________________________
 echo.
@@ -132,23 +132,23 @@ echo       ___________________________________________________________
 echo.   
 title ScriptsPlox
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script1
-if %opcion%==2 goto script2
-if %opcion%==3 goto script3
-if %opcion%==4 goto script4
-if %opcion%==5 goto script5
-if %opcion%==6 goto script6
-if %opcion%==7 goto script7
+if %opcion%==1 goto script-Ver-Datos-PC
+if %opcion%==2 goto script-Optimización-Reparación-Análisis-Disco-Duro
+if %opcion%==3 goto script-Reparar-perfil-temporal
+if %opcion%==4 goto script-Soluciones-problemas-directivas-dominio
+if %opcion%==5 goto script-Limpiar-cola-impresion-Spooler
+if %opcion%==6 goto script-Buscar-drivers
 
-
+if %opcion%==8 goto script-Temporal
+if %opcion%==9 goto script?
 if %opcion%==0 goto script0
-if /i "%opcion%"=="A" goto scriptAdministradorDeTareas
-if /i "%opcion%"=="D" goto scriptAdministradorDeDispositivos
-if /i "%opcion%"=="T" goto scriptTecladoEnPantalla
-if /i "%opcion%"=="R" goto scriptRepositorioGithub
+if /i "%opcion%"=="A" goto script-Administrador-De-Tareas
+if /i "%opcion%"=="D" goto script-Administrador-De-Dispositivos
+if /i "%opcion%"=="T" goto script-Teclado-En-Pantalla
+if /i "%opcion%"=="R" goto script-Repositorio-Github
 if /i "%opcion%"=="S" goto fin
 echo Opción inválida, intenta de nuevo.
-goto inicio
+goto menu-Inicio
 
 
 
@@ -158,7 +158,7 @@ echo -------------- VOLVER A MENU INICIO --------------
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para cerrar ventana:
-if /i "%answer%"=="S" goto inicio
+if /i "%answer%"=="S" goto menu-Inicio
 goto fin
 
 
@@ -166,7 +166,7 @@ goto fin
 
 
 
-:script1
+:script-Ver-Datos-PC
 cls
 mode con: cols=190 lines=45
 REM Mostramos la información del equipo en la consola https://stackoverflow.com/a/29026783
@@ -194,14 +194,14 @@ goto volverInicio
 
 
 
-:script2
+:script-Temporal
 REM teles temporalmente mientras encuentro algo mejor que asignar
 explorer "https://alplox.github.io/teles/"
-goto inicio
+goto menu-Inicio
 
 
 
-:script3
+:script?
 REM ??? temporal mientras encuentro algo mejor que asignar
 cls
 title Descuida son solo números aleatorios, puedes revisar el código :)
@@ -223,7 +223,7 @@ echo.
 set /p answer=Escribe S:
 if /i "%answer%"=="S" (
   color 0F
-  goto inicio
+  goto menu-Inicio
 ) else (
   goto rabbit
 )
@@ -251,7 +251,7 @@ echo.
 echo.
 timeout /t 5
 color 0F
-goto inicio     
+goto menu-Inicio     
 
 
 
@@ -267,7 +267,7 @@ goto inicio
 
 
 
-:script4
+:script-Soluciones-problemas-directivas-dominio
 cls
 echo -------------- Dominio troubleshooting -------------- 
 echo.
@@ -291,7 +291,7 @@ goto volverInicio
 :Optimización-Reparación-Analisis disco duro
 :------------------------------------------------------------------------------------------------
 
-:script5
+:script-Optimización-Reparación-Análisis-Disco-Duro
 cls
 mode con: cols=120 lines=25
 echo       ___________________________________________________________
@@ -316,29 +316,29 @@ echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script5a
-if %opcion%==2 goto script5b
-if %opcion%==3 goto script5c
-if %opcion%==4 goto script5d
-if %opcion%==5 goto script5e
-if %opcion%==6 goto script5f
-if %opcion%==7 goto script5g
-if /i "%opcion%"=="S" goto inicio
+if %opcion%==1 goto script-Optimización-Reparación-Análisis-Disco-Duro-a
+if %opcion%==2 goto script-Optimización-Reparación-Análisis-Disco-Duro-b
+if %opcion%==3 goto script-Optimización-Reparación-Análisis-Disco-Duro-c
+if %opcion%==4 goto script-Optimización-Reparación-Análisis-Disco-Duro-d
+if %opcion%==5 goto script-Optimización-Reparación-Análisis-Disco-Duro-e
+if %opcion%==6 goto script-Optimización-Reparación-Análisis-Disco-Duro-f
+if %opcion%==7 goto script-Optimización-Reparación-Análisis-Disco-Duro-g
+if /i "%opcion%"=="S" goto menu-Inicio
 echo Opción inválida, intenta de nuevo.
-goto script5
+goto script-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:volverInicioScript5
+:volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 echo. 
 echo -------------- VOLVER A MENU INICIO -------------- 
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para regresar a submenu Optimización/Reparación/Analisis disco duro:
-if /i "%answer%"=="S" goto inicio
-goto script5
+if /i "%answer%"=="S" goto menu-Inicio
+goto script-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5a
+:script-Optimización-Reparación-Análisis-Disco-Duro-a
 REM OPCION 1
 cls
     REM El comando sfc /scannow se puede usar para verificar la integridad de 
@@ -353,10 +353,10 @@ echo ¿Comenzar SFC ahora?
 echo. 
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" sfc /scannow
-goto volverInicioScript5
+goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5b
+:script-Optimización-Reparación-Análisis-Disco-Duro-b
 REM OPCION 2
 cls
     REM Este comando ejecuta DISM (Deployment Image Servicing and Management) y utiliza las opciones
@@ -370,10 +370,10 @@ echo ¿Comenzar DISM ahora?
 echo. 
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" dism.exe /online /cleanup-image /restorehealth
-goto volverInicioScript5
+goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5c
+:script-Optimización-Reparación-Análisis-Disco-Duro-c
 REM OPCION 3
 cls
     REM Este comando ejecuta la herramienta CHKDSK (Check Disk) y utiliza la opción f para buscar y reparar errores en el disco duro.
@@ -384,10 +384,10 @@ echo ¿Reparar errores disco con chkdsk ahora?
 echo.
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" chkdsk /f:
-goto volverInicioScript5
+goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5d
+:script-Optimización-Reparación-Análisis-Disco-Duro-d
 REM OPCION 4
 cls
 echo -------------- defrag -------------- 
@@ -403,18 +403,18 @@ set /p answer=Escribe S para sí o N para no:
 		echo. 
 		echo Desfragmentación del disco C completa.
 	)
-goto volverInicioScript5
+goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5e
+:script-Optimización-Reparación-Análisis-Disco-Duro-e
 REM OPCION 5
 cls
 start cleanmgr.exe
 cls
-goto script5
+goto script-Optimización-Reparación-Análisis-Disco-Duro
 
 
-:script5f
+:script-Optimización-Reparación-Análisis-Disco-Duro-f
 REM OPCION 6
 cls
 echo -------------- Mover archivos temporales -------------- 
@@ -480,14 +480,14 @@ if /i ("%answer%"=="S") (
 	echo Total size of files moved: %TOTALSIZE% MB
 	echo Done!
 	pause
-	goto volverInicioScript5
+	goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 ) else (
 	cls
-	goto script5
+	goto script-Optimización-Reparación-Análisis-Disco-Duro
 )
 
 
-:script5g
+:script-Optimización-Reparación-Análisis-Disco-Duro-g
 REM OPCION 7
 cls
 echo -------------- wmic diskdrive get status y fsutil dirty query c: -------------- 
@@ -495,7 +495,7 @@ echo.
 echo El estado del disco duro es el siguiente: 
 echo.
 wmic diskdrive get status && fsutil dirty query C:
-goto volverInicioScript5
+goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
 
 
 
@@ -503,7 +503,7 @@ goto volverInicioScript5
 :Reparar perfil temporal
 :------------------------------------------------------------------------------------------------
 
-:script6
+:script-Reparar-perfil-temporal
 cls
 mode con: cols=120 lines=25
 echo       ___________________________________________________________
@@ -521,18 +521,18 @@ echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script6a
-if %opcion%==2 goto script6b
-if %opcion%==3 goto script6c
+if %opcion%==1 goto script-Reparar-perfil-temporal-a
+if %opcion%==2 goto script-Reparar-perfil-temporal-b
+if %opcion%==3 goto script-Reparar-perfil-temporal-c
 
-if %opcion%==5 goto script6e
-if /i "%opcion%"=="S" goto inicio
+if %opcion%==5 goto script-Reparar-perfil-temporal-e
+if /i "%opcion%"=="S" goto menu-Inicio
 echo Opción inválida, intenta de nuevo.
-goto script6
+goto script-Reparar-perfil-temporal
 
 
 
-:script6a
+:script-Reparar-perfil-temporal-a
 REM abrir carpeta usuarios
 if exist "C:\Usuarios\" (
   explorer "C:\Usuarios\"
@@ -543,27 +543,27 @@ REM lanzar regedit en profilist
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "LastKey" /d "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /f 
 start "" regedit
 cls
-goto script6
+goto script-Reparar-perfil-temporal
 
 
-:script6b
+:script-Reparar-perfil-temporal-b
 if exist "C:\Usuarios\" (
   explorer "C:\Usuarios\"
 ) else (
   explorer "C:\Users\"
 )
 cls
-goto script6
+goto script-Reparar-perfil-temporal
 
 
-:script6c
+:script-Reparar-perfil-temporal-c
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "LastKey" /d "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /f 
 start "" regedit
 cls
-goto script6
+goto script-Reparar-perfil-temporal
 
 
-:script6e
+:script-Reparar-perfil-temporal-e
 cls
 mode con: cols=160 lines=25
 echo -------------- Guía respaldar/recuperar perfil -------------- 
@@ -576,8 +576,41 @@ echo -------------- VOLVER A MENU INICIO --------------
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para regresar a submenu reparar perfil temporal:
-if /i "%answer%"=="S" goto inicio
-goto script6
+if /i "%answer%"=="S" goto menu-Inicio
+goto script-Reparar-perfil-temporal
+
+
+
+
+
+
+
+
+
+:script-Limpiar-cola-impresion-Spooler
+cls
+REM /Q: Elimina los archivos de forma silenciosa sin pedir confirmación.
+REM /F: Fuerza la eliminación de los archivos, incluso si están en uso.
+REM /S: Elimina los archivos de todas las subcarpetas bajo la carpeta especificada.
+echo. 
+echo -------------- Limpiar cola impresion/Spooler -------------- 
+echo. 
+echo ¿Reiniciar cola impresion/spooler ahora?
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" net stop spooler && del %systemroot%\System32\spool\printers\* /Q /F /S && net start spooler
+goto volverInicio
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -585,7 +618,7 @@ goto script6
 :Buscar drivers desde sitios oficiales
 :------------------------------------------------------------------------------------------------
 
-:script7
+:script-Buscar-drivers
 cls
 echo       ___________________________________________________________
 echo.
@@ -604,52 +637,84 @@ echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script7a
-if %opcion%==2 goto script7b
-if %opcion%==3 goto script7c
-if %opcion%==4 goto script7d
-if %opcion%==5 goto script73
-if %opcion%==6 goto script7f
-if %opcion%==7 goto script7g
-if /i "%opcion%"=="S" goto inicio
+if %opcion%==1 goto script-Buscar-drivers-a
+if %opcion%==2 goto script-Buscar-drivers-b
+if %opcion%==3 goto script-Buscar-drivers-c
+if %opcion%==4 goto script-Buscar-drivers-d
+if %opcion%==5 goto script-Buscar-drivers-e
+if %opcion%==6 goto script-Buscar-drivers-f
+if %opcion%==7 goto script-Buscar-drivers-g
+if /i "%opcion%"=="S" goto menu-Inicio
 echo Opción inválida, intenta de nuevo.
-goto script7
+goto script-Buscar-drivers
 
 
-:script7a
+:script-Buscar-drivers-a
 REM LENOVO
 explorer "https://pcsupport.lenovo.com/cl/es"
-goto script7
+goto script-Buscar-drivers
 
-:script7b
+:script-Buscar-drivers-b
 REM HP
 explorer "https://support.hp.com/cl-es/drivers"
-goto script7
+goto script-Buscar-drivers
 
-:script7c
+:script-Buscar-drivers-c
 REM DELL
 explorer "https://www.dell.com/support/home/es-cl?app=drivers"
-goto script7
+goto script-Buscar-drivers
 
-:script7d
+:script-Buscar-drivers-d
 REM INTEL
 explorer "https://www.intel.la/content/www/xl/es/download-center/home.html"
-goto script7
+goto script-Buscar-drivers
 
-:script7e
+:script-Buscar-drivers-e
 REM AMD
 explorer "https://www.amd.com/es/support"
-goto script7
+goto script-Buscar-drivers
 
-:script7f
+:script-Buscar-drivers-f
 REM NVIDIA
 explorer "https://www.nvidia.es/Download/index.aspx?lang=es"
-goto script7
+goto script-Buscar-drivers
 
-:script7g
+:script-Buscar-drivers-g
 REM Snapy driver
 explorer "https://www.snappy-driver-installer.org/"
-goto script7
+goto script-Buscar-drivers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -658,30 +723,30 @@ cls
 echo ¿Quieres reiniciar el equipo en inicio avanzado?
 set /p answer=Escribe S para sí o N para volver a menu inicio:
 if /i "%answer%"=="S" shutdown /r /f /o /t 0
-goto inicio
+goto menu-Inicio
 
 
 
-:scriptAdministradorDeDispositivos
+:script-Administrador-De-Dispositivos
 start devmgmt.msc
-goto inicio
+goto menu-Inicio
 
 
 
-:scriptAdministradorDeTareas
+:script-Administrador-De-Tareas
 start taskmgr
-goto inicio
+goto menu-Inicio
 
 
 
-:scriptTecladoEnPantalla
+:script-Teclado-En-Pantalla
 start osk
-goto inicio
+goto menu-Inicio
 
 
-:scriptRepositorioGithub
+:script-Repositorio-Github
 explorer "https://github.com/Alplox/ScriptsPlox"
-goto inicio
+goto menu-Inicio
 
 :fin
 REM Código final del script/cierra ventana

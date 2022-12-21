@@ -1,6 +1,6 @@
 # ScriptsPlox
 
-Script batch que contiene utilidades para resolución de problemas comunes en equipos que veo en mi trabajo.
+Script batch que contiene utilidades para resolución de problemas cotidianos.
 
 ```
                           ┌───────┐   ╔════════════════════╗
@@ -20,14 +20,14 @@ Script batch que contiene utilidades para resolución de problemas comunes en eq
              Bienvenido al menú de scripts:
 
              [1] Ver datos PC (dominio, hostname, serial, mac)
-             [2] Ver teles
-             [ ] ?
+             [2] Optimización-Reparación-Análisis disco duro
+             [3] Reparar perfil temporal
              [4] Soluciones problemas directivas dominio
-             [5] Optimización/Reparación/Análisis disco duro
-             [6] Reparar perfil temporal
-             [7] Buscar drivers desde sitios oficiales
+             [5] Limpiar cola impresion-Spooler
+             [6] Buscar drivers desde sitios oficiales
              [ ] 
-             [ ] 
+             [8] Ver teles
+             [ ] ?
              [0] Reiniciar en inicio avanzado
           __________________________________________________
 
