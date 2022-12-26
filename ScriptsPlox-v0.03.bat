@@ -4,7 +4,7 @@ chcp 65001
 REM Script Name   : ScriptsPlox.bat
 REM Author        : Alplox
 REM Created       : 05-12-2022
-REM Version       : v0.02
+REM Version       : v0.03
 REM Repository    : https://github.com/Alplox/ScriptsPlox
 REM Description   : Batch que contiene utilidades para resolución de problemas comunes en equipos que veo en mi trabajo.
 
@@ -87,7 +87,19 @@ if '%errorlevel%' NEQ '0' (
 
 
 
-:menu-Inicio
+
+
+
+
+
+
+REM ███    ███ ███████ ███    ██ ██    ██     ██ ███    ██ ██  ██████ ██  ██████  
+REM ████  ████ ██      ████   ██ ██    ██     ██ ████   ██ ██ ██      ██ ██    ██ 
+REM ██ ████ ██ █████   ██ ██  ██ ██    ██     ██ ██ ██  ██ ██ ██      ██ ██    ██ 
+REM ██  ██  ██ ██      ██  ██ ██ ██    ██     ██ ██  ██ ██ ██ ██      ██ ██    ██ 
+REM ██      ██ ███████ ██   ████  ██████      ██ ██   ████ ██  ██████ ██  ██████  
+
+:menu-inicio
 cls
 mode con: cols=90 lines=45
 :::                          ┌───────┐   ╔════════════════════╗
@@ -96,7 +108,7 @@ mode con: cols=90 lines=45
 :::       ╔══════════════╗   │[■■■■]o│   ║       Alplox       ║
 :::       ║              ║   ├───────┤   ║                    ║
 :::       ║   Scripts y  ║   │       │   ╚════════╤══╤══════o═╝
-:::       ║ Herramientas ║   │ v0.02 │─────┘  ____│__│____
+:::       ║ Herramientas ║   │ v0.03 │─────┘  ____│__│____
 :::       ║              ║   │       │─┐     /____________\
 :::       ╚══════════════╝   └───────┘ │   ________________
 :::      /::::::::::::::::\            └──/::::::::::::::::\   /T\
@@ -132,41 +144,44 @@ echo       ___________________________________________________________
 echo.   
 title ScriptsPlox
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script-Ver-Datos-PC
-if %opcion%==2 goto script-Optimización-Reparación-Análisis-Disco-Duro
-if %opcion%==3 goto script-Reparar-perfil-temporal
-if %opcion%==4 goto script-Soluciones-problemas-directivas-dominio
-if %opcion%==5 goto script-Limpiar-cola-impresion-Spooler
-if %opcion%==6 goto script-Buscar-drivers
+if %opcion%==1 goto menu-inicio-opcion-1
+if %opcion%==2 goto menu-inicio-opcion-2
+if %opcion%==3 goto menu-inicio-opcion-3
+if %opcion%==4 goto menu-inicio-opcion-4
+if %opcion%==5 goto menu-inicio-opcion-5
+if %opcion%==6 goto menu-inicio-opcion-6
 
-if %opcion%==8 goto script-Temporal
-if %opcion%==9 goto script?
-if %opcion%==0 goto script0
-if /i "%opcion%"=="A" goto script-Administrador-De-Tareas
-if /i "%opcion%"=="D" goto script-Administrador-De-Dispositivos
-if /i "%opcion%"=="T" goto script-Teclado-En-Pantalla
-if /i "%opcion%"=="R" goto script-Repositorio-Github
+if %opcion%==8 goto menu-inicio-opcion-8
+if %opcion%==9 goto menu-inicio-opcion-9
+if %opcion%==0 goto menu-inicio-opcion-0
+if /i "%opcion%"=="A" goto abrir-administrador-de-tareas
+if /i "%opcion%"=="D" goto abrir-administrador-de-dispositivos
+if /i "%opcion%"=="T" goto abrir-teclado-en-pantalla
+if /i "%opcion%"=="R" goto abrir-repositorio-github
 if /i "%opcion%"=="S" goto fin
 echo Opción inválida, intenta de nuevo.
-goto menu-Inicio
+goto menu-inicio
 
-
-
-:volverInicio
+:volver-a-menu-inicio
 echo. 
 echo -------------- VOLVER A MENU INICIO -------------- 
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para cerrar ventana:
-if /i "%answer%"=="S" goto menu-Inicio
+if /i "%answer%"=="S" goto menu-inicio
 goto fin
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██      ██ 
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ███ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██      ██ 
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██      ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████      ██ 
 
-:script-Ver-Datos-PC
+:menu-inicio-opcion-1
 cls
 mode con: cols=190 lines=45
 REM Mostramos la información del equipo en la consola https://stackoverflow.com/a/29026783
@@ -190,108 +205,19 @@ echo.
 echo -------------- wmic csproduct -------------- 
 echo. 
 wmic csproduct 
-goto volverInicio
-
-
-
-:script-Temporal
-REM teles temporalmente mientras encuentro algo mejor que asignar
-explorer "https://alplox.github.io/teles/"
-goto menu-Inicio
-
-
-
-:script?
-REM ??? temporal mientras encuentro algo mejor que asignar
-cls
-title Descuida son solo números aleatorios, puedes revisar el código :)
-mode con: cols=190 lines=45
-color 02
-set contador=0
-:bucle
-echo %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random%
-timeout /t 0
-set /a contador=%contador%+1
-if %contador% LSS 40 goto bucle
-echo.
-echo.
-echo.
-echo.
-echo.
-echo “Ya sé Kung fú.”
-echo.
-set /p answer=Escribe S:
-if /i "%answer%"=="S" (
-  color 0F
-  goto menu-Inicio
-) else (
-  goto rabbit
-)
-
-
-:rabbit
-cls
-mode con: cols=220 lines=45
-color C0
-echo.
-echo.
-echo ████████ ██   ██ ███████     ███    ███  █████  ████████ ██████  ██ ██   ██     ██   ██  █████  ███████     ██    ██  ██████  ██    ██                                                                             
-echo    ██    ██   ██ ██          ████  ████ ██   ██    ██    ██   ██ ██  ██ ██      ██   ██ ██   ██ ██           ██  ██  ██    ██ ██    ██                                                                             
-echo    ██    ███████ █████       ██ ████ ██ ███████    ██    ██████  ██   ███       ███████ ███████ ███████       ████   ██    ██ ██    ██                                                                             
-echo    ██    ██   ██ ██          ██  ██  ██ ██   ██    ██    ██   ██ ██  ██ ██      ██   ██ ██   ██      ██        ██    ██    ██ ██    ██                                                                             
-echo    ██    ██   ██ ███████     ██      ██ ██   ██    ██    ██   ██ ██ ██   ██     ██   ██ ██   ██ ███████        ██     ██████   ██████  ██ ██ ██                                                                    
-echo.
-echo.                                                                                                                                                                                                                  
-echo  ███████  ██████  ██      ██       ██████  ██     ██     ████████ ██   ██ ███████     ██     ██ ██   ██ ██ ████████ ███████     ██████   █████  ██████  ██████  ██ ████████    
-echo  ██      ██    ██ ██      ██      ██    ██ ██     ██        ██    ██   ██ ██          ██     ██ ██   ██ ██    ██    ██          ██   ██ ██   ██ ██   ██ ██   ██ ██    ██       
-echo  █████   ██    ██ ██      ██      ██    ██ ██  █  ██        ██    ███████ █████       ██  █  ██ ███████ ██    ██    █████       ██████  ███████ ██████  ██████  ██    ██       
-echo  ██      ██    ██ ██      ██      ██    ██ ██ ███ ██        ██    ██   ██ ██          ██ ███ ██ ██   ██ ██    ██    ██          ██   ██ ██   ██ ██   ██ ██   ██ ██    ██       
-echo  ██       ██████  ███████ ███████  ██████   ███ ███         ██    ██   ██ ███████      ███ ███  ██   ██ ██    ██    ███████     ██   ██ ██   ██ ██████  ██████  ██    ██    ██ 
-echo.                                                                                                                                                                                                             
-echo.
-timeout /t 5
-color 0F
-goto menu-Inicio     
+goto volver-a-menu-inicio
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██     ██████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██          ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██      █████  
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██     ██      
+REM  ██████  ██       ██████ ██  ██████  ██   ████     ███████ 
 
-
-
-
-
-
-
-
-
-
-:script-Soluciones-problemas-directivas-dominio
-cls
-echo -------------- Dominio troubleshooting -------------- 
-echo.
-set domain=%userdnsdomain%
-if "%domain%" == "" (
-  echo El equipo no está conectado a un dominio.
-) else (
-  echo El equipo está conectado al dominio %domain%.
-)
-echo. 
-echo -------------- gpupdate /force -------------- 
-echo. 
-echo ¿Ejecutar gpupdate force?
-set /p answer=Escribe S para sí o N para no:
-if /i "%answer%"=="S" gpupdate /force
-goto volverInicio
-
-
-
-:------------------------------------------------------------------------------------------------
-:Optimización-Reparación-Analisis disco duro
-:------------------------------------------------------------------------------------------------
-
-:script-Optimización-Reparación-Análisis-Disco-Duro
+:menu-inicio-opcion-2
 cls
 mode con: cols=120 lines=25
 echo       ___________________________________________________________
@@ -316,29 +242,27 @@ echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script-Optimización-Reparación-Análisis-Disco-Duro-a
-if %opcion%==2 goto script-Optimización-Reparación-Análisis-Disco-Duro-b
-if %opcion%==3 goto script-Optimización-Reparación-Análisis-Disco-Duro-c
-if %opcion%==4 goto script-Optimización-Reparación-Análisis-Disco-Duro-d
-if %opcion%==5 goto script-Optimización-Reparación-Análisis-Disco-Duro-e
-if %opcion%==6 goto script-Optimización-Reparación-Análisis-Disco-Duro-f
-if %opcion%==7 goto script-Optimización-Reparación-Análisis-Disco-Duro-g
-if /i "%opcion%"=="S" goto menu-Inicio
+if %opcion%==1 goto menu-inicio-opcion-2-submenu-opcion-1
+if %opcion%==2 goto menu-inicio-opcion-2-submenu-opcion-2
+if %opcion%==3 goto menu-inicio-opcion-2-submenu-opcion-3
+if %opcion%==4 goto menu-inicio-opcion-2-submenu-opcion-4
+if %opcion%==5 goto menu-inicio-opcion-2-submenu-opcion-5
+if %opcion%==6 goto menu-inicio-opcion-2-submenu-opcion-6
+if %opcion%==7 goto menu-inicio-opcion-2-submenu-opcion-7
+if /i "%opcion%"=="S" goto menu-inicio
 echo Opción inválida, intenta de nuevo.
-goto script-Optimización-Reparación-Análisis-Disco-Duro
+goto menu-inicio-opcion-2
 
-
-:volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+:volver-a-menu-inicio-opcion-2-submenu
 echo. 
 echo -------------- VOLVER A MENU INICIO -------------- 
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para regresar a submenu Optimización/Reparación/Analisis disco duro:
-if /i "%answer%"=="S" goto menu-Inicio
-goto script-Optimización-Reparación-Análisis-Disco-Duro
+if /i "%answer%"=="S" goto menu-inicio
+goto menu-inicio-opcion-2
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-a
+:menu-inicio-opcion-2-submenu-opcion-1
 REM OPCION 1
 cls
     REM El comando sfc /scannow se puede usar para verificar la integridad de 
@@ -353,10 +277,9 @@ echo ¿Comenzar SFC ahora?
 echo. 
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" sfc /scannow
-goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+goto volver-a-menu-inicio-opcion-2-submenu
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-b
+:menu-inicio-opcion-2-submenu-opcion-2
 REM OPCION 2
 cls
     REM Este comando ejecuta DISM (Deployment Image Servicing and Management) y utiliza las opciones
@@ -370,10 +293,9 @@ echo ¿Comenzar DISM ahora?
 echo. 
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" dism.exe /online /cleanup-image /restorehealth
-goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+goto volver-a-menu-inicio-opcion-2-submenu
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-c
+:menu-inicio-opcion-2-submenu-opcion-3
 REM OPCION 3
 cls
     REM Este comando ejecuta la herramienta CHKDSK (Check Disk) y utiliza la opción f para buscar y reparar errores en el disco duro.
@@ -384,10 +306,9 @@ echo ¿Reparar errores disco con chkdsk ahora?
 echo.
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" chkdsk /f:
-goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+goto volver-a-menu-inicio-opcion-2-submenu
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-d
+:menu-inicio-opcion-2-submenu-opcion-4
 REM OPCION 4
 cls
 echo -------------- defrag -------------- 
@@ -403,18 +324,16 @@ set /p answer=Escribe S para sí o N para no:
 		echo. 
 		echo Desfragmentación del disco C completa.
 	)
-goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+goto volver-a-menu-inicio-opcion-2-submenu
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-e
+:menu-inicio-opcion-2-submenu-opcion-5
 REM OPCION 5
 cls
 start cleanmgr.exe
 cls
-goto script-Optimización-Reparación-Análisis-Disco-Duro
+goto menu-inicio-opcion-2
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-f
+:menu-inicio-opcion-2-submenu-opcion-6
 REM OPCION 6
 cls
 echo -------------- Mover archivos temporales -------------- 
@@ -480,14 +399,13 @@ if /i ("%answer%"=="S") (
 	echo Total size of files moved: %TOTALSIZE% MB
 	echo Done!
 	pause
-	goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+	goto volver-a-menu-inicio-opcion-2-submenu
 ) else (
 	cls
-	goto script-Optimización-Reparación-Análisis-Disco-Duro
+	goto menu-inicio-opcion-2
 )
 
-
-:script-Optimización-Reparación-Análisis-Disco-Duro-g
+:menu-inicio-opcion-2-submenu-opcion-7
 REM OPCION 7
 cls
 echo -------------- wmic diskdrive get status y fsutil dirty query c: -------------- 
@@ -495,15 +413,19 @@ echo.
 echo El estado del disco duro es el siguiente: 
 echo.
 wmic diskdrive get status && fsutil dirty query C:
-goto volverInicioScript-Optimización-Reparación-Análisis-Disco-Duro
+goto volver-a-menu-inicio-opcion-2-submenu
 
 
 
-:------------------------------------------------------------------------------------------------
-:Reparar perfil temporal
-:------------------------------------------------------------------------------------------------
 
-:script-Reparar-perfil-temporal
+
+REM  ██████  ██████   ██████ ██  ██████  ███    ██     ██████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██          ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██      █████  
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██          ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████     ██████  
+
+:menu-inicio-opcion-3
 cls
 mode con: cols=120 lines=25
 echo       ___________________________________________________________
@@ -513,26 +435,22 @@ echo.
 echo             [1] abrir todo C:\Usuarios y regedit ProfileList [Renombrar usuario existente]
 echo             [2] abrir C:\Usuarios [Renombrar usuario existente]
 echo             [3] abrir regedit ProfileList [Renombrar usuario existente]
-echo             [ ] 
-echo             [5] Ver guía
+echo             [4] Ver guía
 echo          __________________________________________________
 echo.
 echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script-Reparar-perfil-temporal-a
-if %opcion%==2 goto script-Reparar-perfil-temporal-b
-if %opcion%==3 goto script-Reparar-perfil-temporal-c
-
-if %opcion%==5 goto script-Reparar-perfil-temporal-e
-if /i "%opcion%"=="S" goto menu-Inicio
+if %opcion%==1 goto menu-inicio-opcion-3-submenu-opcion-1
+if %opcion%==2 goto menu-inicio-opcion-3-submenu-opcion-2
+if %opcion%==3 goto menu-inicio-opcion-3-submenu-opcion-3
+if %opcion%==4 goto menu-inicio-opcion-3-submenu-opcion-4
+if /i "%opcion%"=="S" goto menu-inicio
 echo Opción inválida, intenta de nuevo.
-goto script-Reparar-perfil-temporal
+goto menu-inicio-opcion-3
 
-
-
-:script-Reparar-perfil-temporal-a
+:menu-inicio-opcion-3-submenu-opcion-1
 REM abrir carpeta usuarios
 if exist "C:\Usuarios\" (
   explorer "C:\Usuarios\"
@@ -543,32 +461,29 @@ REM lanzar regedit en profilist
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "LastKey" /d "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /f 
 start "" regedit
 cls
-goto script-Reparar-perfil-temporal
+goto menu-inicio-opcion-3
 
-
-:script-Reparar-perfil-temporal-b
+:menu-inicio-opcion-3-submenu-opcion-2
 if exist "C:\Usuarios\" (
   explorer "C:\Usuarios\"
 ) else (
   explorer "C:\Users\"
 )
 cls
-goto script-Reparar-perfil-temporal
+goto menu-inicio-opcion-3
 
-
-:script-Reparar-perfil-temporal-c
+:menu-inicio-opcion-3-submenu-opcion-3
 REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "LastKey" /d "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList" /f 
 start "" regedit
 cls
-goto script-Reparar-perfil-temporal
+goto menu-inicio-opcion-3
 
-
-:script-Reparar-perfil-temporal-e
+:menu-inicio-opcion-3-submenu-opcion-4
 cls
 mode con: cols=160 lines=25
 echo -------------- Guía respaldar/recuperar perfil -------------- 
 echo 1- ir carpeta usuarios (C:\Usuarios\), buscar usuario con problemas y renombrar para que se deje de usar (ejem: Respaldo (DD-MM-AA) usuario)
-echo 2- ir regedit profileList y renombrar en mismo formato (HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList).
+echo 2- ir regedit profileList y renombrar en mismo formato (HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList) carpeta que incluya .BAK al final.
 echo 3- volver a ingresar como aquel usuario.
 echo 4- recuperar archivos desde carpeta usuario renombrada (archivos y marcadores google desde Appdata-Local-Google)
 echo. 
@@ -576,18 +491,48 @@ echo -------------- VOLVER A MENU INICIO --------------
 echo. 
 echo ¿Volver a Menu Inicio? 
 set /p answer=Escribe S para sí o N para regresar a submenu reparar perfil temporal:
-if /i "%answer%"=="S" goto menu-Inicio
-goto script-Reparar-perfil-temporal
+if /i "%answer%"=="S" goto menu-inicio
+goto menu-inicio-opcion-3
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██     ██   ██ 
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██   ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██     ███████ 
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██          ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████          ██ 
+
+:menu-inicio-opcion-4
+cls
+echo -------------- Dominio troubleshooting -------------- 
+echo.
+set domain=%userdnsdomain%
+if "%domain%" == "" (
+  echo El equipo no está conectado a un dominio.
+) else (
+  echo El equipo está conectado al dominio %domain%.
+)
+echo. 
+echo -------------- gpupdate /force -------------- 
+echo. 
+echo ¿Ejecutar gpupdate force?
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" gpupdate /force
+goto volver-a-menu-inicio
 
 
 
 
-:script-Limpiar-cola-impresion-Spooler
+
+REM  ██████  ██████   ██████ ██  ██████  ███    ██     ███████ 
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██      
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██     ███████ 
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██          ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████     ███████ 
+
+:menu-inicio-opcion-5
 cls
 REM /Q: Elimina los archivos de forma silenciosa sin pedir confirmación.
 REM /F: Fuerza la eliminación de los archivos, incluso si están en uso.
@@ -598,27 +543,19 @@ echo.
 echo ¿Reiniciar cola impresion/spooler ahora?
 set /p answer=Escribe S para sí o N para no:
 if /i "%answer%"=="S" net stop spooler && del %systemroot%\System32\spool\printers\* /Q /F /S && net start spooler
-goto volverInicio
+goto volver-a-menu-inicio
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██      ██████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██       
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██     ███████  
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██     ██    ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████      ██████  
 
-
-
-
-
-
-
-
-
-
-:------------------------------------------------------------------------------------------------
-:Buscar drivers desde sitios oficiales
-:------------------------------------------------------------------------------------------------
-
-:script-Buscar-drivers
+:menu-inicio-opcion-6
 cls
 echo       ___________________________________________________________
 echo.
@@ -637,116 +574,232 @@ echo             [S] Regresar a menú inicio
 echo       ___________________________________________________________
 echo.   
 set /p opcion=Ingrese el número de la opción deseada:
-if %opcion%==1 goto script-Buscar-drivers-a
-if %opcion%==2 goto script-Buscar-drivers-b
-if %opcion%==3 goto script-Buscar-drivers-c
-if %opcion%==4 goto script-Buscar-drivers-d
-if %opcion%==5 goto script-Buscar-drivers-e
-if %opcion%==6 goto script-Buscar-drivers-f
-if %opcion%==7 goto script-Buscar-drivers-g
-if /i "%opcion%"=="S" goto menu-Inicio
+if %opcion%==1 goto menu-inicio-opcion-6-submenu-opcion-1
+if %opcion%==2 goto menu-inicio-opcion-6-submenu-opcion-2
+if %opcion%==3 goto menu-inicio-opcion-6-submenu-opcion-3
+if %opcion%==4 goto menu-inicio-opcion-6-submenu-opcion-4
+if %opcion%==5 goto menu-inicio-opcion-6-submenu-opcion-5
+if %opcion%==6 goto menu-inicio-opcion-6-submenu-opcion-6
+if %opcion%==7 goto menu-inicio-opcion-6-submenu-opcion-7
+if /i "%opcion%"=="S" goto menu-inicio
 echo Opción inválida, intenta de nuevo.
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-
-:script-Buscar-drivers-a
+:menu-inicio-opcion-6-submenu-opcion-1
 REM LENOVO
 explorer "https://pcsupport.lenovo.com/cl/es"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-b
+:menu-inicio-opcion-6-submenu-opcion-2
 REM HP
 explorer "https://support.hp.com/cl-es/drivers"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-c
+:menu-inicio-opcion-6-submenu-opcion-3
 REM DELL
 explorer "https://www.dell.com/support/home/es-cl?app=drivers"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-d
+:menu-inicio-opcion-6-submenu-opcion-4
 REM INTEL
 explorer "https://www.intel.la/content/www/xl/es/download-center/home.html"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-e
+:menu-inicio-opcion-6-submenu-opcion-5
 REM AMD
 explorer "https://www.amd.com/es/support"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-f
+:menu-inicio-opcion-6-submenu-opcion-6
 REM NVIDIA
 explorer "https://www.nvidia.es/Download/index.aspx?lang=es"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
-:script-Buscar-drivers-g
+:menu-inicio-opcion-6-submenu-opcion-7
 REM Snapy driver
 explorer "https://www.snappy-driver-installer.org/"
-goto script-Buscar-drivers
+goto menu-inicio-opcion-6
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██     ███████ 
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██          ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██         ██  
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██        ██   
+REM  ██████  ██       ██████ ██  ██████  ██   ████        ██   
+                                                           
+REM aún nada                                                     
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██      █████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██   ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██      █████  
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██     ██   ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████      █████  
+
+:menu-inicio-opcion-8
+REM teles temporalmente mientras encuentro algo mejor que asignar
+explorer "https://alplox.github.io/teles/"
+goto menu-inicio
 
 
 
 
 
+REM  ██████  ██████   ██████ ██  ██████  ███    ██      █████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██   ██ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██      ██████ 
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██          ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████      █████  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-:script0
+:menu-inicio-opcion-9
+REM ??? temporal mientras encuentro algo mejor que asignar
 cls
-echo ¿Quieres reiniciar el equipo en inicio avanzado?
-set /p answer=Escribe S para sí o N para volver a menu inicio:
-if /i "%answer%"=="S" shutdown /r /f /o /t 0
-goto menu-Inicio
+title Descuida son solo números aleatorios, puedes revisar el código :)
+mode con: cols=190 lines=45
+color 02
+set contador=0
+:bucle
+echo %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random% %random%
+timeout /t 0
+set /a contador=%contador%+1
+if %contador% LSS 40 goto bucle
+echo.
+echo.
+echo.
+echo.
+echo.
+echo “Ya sé Kung fú.”
+echo.
+set /p answer=Escribe S:
+if /i "%answer%"=="S" (
+  color 0F
+  goto menu-inicio
+) else (
+  goto rabbit
+)
+
+:rabbit
+cls
+mode con: cols=220 lines=45
+color C0
+echo.
+echo.
+echo ████████ ██   ██ ███████     ███    ███  █████  ████████ ██████  ██ ██   ██     ██   ██  █████  ███████     ██    ██  ██████  ██    ██                                                                             
+echo    ██    ██   ██ ██          ████  ████ ██   ██    ██    ██   ██ ██  ██ ██      ██   ██ ██   ██ ██           ██  ██  ██    ██ ██    ██                                                                             
+echo    ██    ███████ █████       ██ ████ ██ ███████    ██    ██████  ██   ███       ███████ ███████ ███████       ████   ██    ██ ██    ██                                                                             
+echo    ██    ██   ██ ██          ██  ██  ██ ██   ██    ██    ██   ██ ██  ██ ██      ██   ██ ██   ██      ██        ██    ██    ██ ██    ██                                                                             
+echo    ██    ██   ██ ███████     ██      ██ ██   ██    ██    ██   ██ ██ ██   ██     ██   ██ ██   ██ ███████        ██     ██████   ██████  ██ ██ ██                                                                    
+echo.
+echo.                                                                                                                                                                                                                  
+echo  ███████  ██████  ██      ██       ██████  ██     ██     ████████ ██   ██ ███████     ██     ██ ██   ██ ██ ████████ ███████     ██████   █████  ██████  ██████  ██ ████████    
+echo  ██      ██    ██ ██      ██      ██    ██ ██     ██        ██    ██   ██ ██          ██     ██ ██   ██ ██    ██    ██          ██   ██ ██   ██ ██   ██ ██   ██ ██    ██       
+echo  █████   ██    ██ ██      ██      ██    ██ ██  █  ██        ██    ███████ █████       ██  █  ██ ███████ ██    ██    █████       ██████  ███████ ██████  ██████  ██    ██       
+echo  ██      ██    ██ ██      ██      ██    ██ ██ ███ ██        ██    ██   ██ ██          ██ ███ ██ ██   ██ ██    ██    ██          ██   ██ ██   ██ ██   ██ ██   ██ ██    ██       
+echo  ██       ██████  ███████ ███████  ██████   ███ ███         ██    ██   ██ ███████      ███ ███  ██   ██ ██    ██    ███████     ██   ██ ██   ██ ██████  ██████  ██    ██    ██ 
+echo.                                                                                                                                                                                                             
+echo.
+timeout /t 5
+color 0F
+goto menu-inicio    
 
 
 
-:script-Administrador-De-Dispositivos
+
+
+REM  ██████  ██████   ██████ ██  ██████  ███    ██      ██████  
+REM ██    ██ ██   ██ ██      ██ ██    ██ ████   ██     ██  ████ 
+REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██     ██ ██ ██ 
+REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██     ████  ██ 
+REM  ██████  ██       ██████ ██  ██████  ██   ████      ██████  
+
+:menu-inicio-opcion-0
+cls
+echo       ___________________________________________________________
+echo.
+echo             Bienvenido al submenú de Reinicio-Apagado:
+echo.
+echo             [1] Reiniciar el PC
+echo             [2] Apagar el PC
+echo             [3] Reiniciar en modo avanzado
+echo             [4] Reiniciar en BIOS
+echo          __________________________________________________
+echo.
+echo             [S] Regresar a menú inicio
+echo       ___________________________________________________________
+echo.   
+set /p opcion=Selecciona una opción:
+if "%opcion%"=="1" goto menu-inicio-opcion-0-submenu-opcion-1
+if "%opcion%"=="2" goto menu-inicio-opcion-0-submenu-opcion-2
+if "%opcion%"=="3" goto menu-inicio-opcion-0-submenu-opcion-3
+if "%opcion%"=="4" goto menu-inicio-opcion-0-submenu-opcion-4
+if /i "%opcion%"=="S" goto menu-inicio
+
+
+:menu-inicio-opcion-0-submenu-opcion-1
+echo.
+echo Reiniciando el PC...
+shutdown /r /t 10
+goto script-Reinicio-avanzado
+
+:smenu-inicio-opcion-0-submenu-opcion-2
+echo.
+echo Apagando el PC...
+shutdown /s /t 10
+goto script-Reinicio-avanzado
+
+:menu-inicio-opcion-0-submenu-opcion-3
+echo.
+echo Reiniciando en modo avanzado...
+shutdown /r /o /t 10
+goto script-Reinicio-avanzado
+
+:menu-inicio-opcion-0-submenu-opcion-4
+echo.
+echo Reiniciando en BIOS...
+shutdown /r /o /m \\%computername% /t 10
+goto script-Reinicio-avanzado
+
+
+
+
+
+:abrir-administrador-de-dispositivos
 start devmgmt.msc
-goto menu-Inicio
+goto menu-inicio
 
 
 
-:script-Administrador-De-Tareas
+
+
+:abrir-administrador-de-tareas
 start taskmgr
-goto menu-Inicio
+goto menu-inicio
 
 
 
-:script-Teclado-En-Pantalla
+
+
+:abrir-teclado-en-pantalla
 start osk
-goto menu-Inicio
+goto menu-inicio
 
 
-:script-Repositorio-Github
+
+
+
+:abrir-repositorio-github
 explorer "https://github.com/Alplox/ScriptsPlox"
-goto menu-Inicio
+goto menu-inicio
+
+
+
+
 
 :fin
 REM Código final del script/cierra ventana
