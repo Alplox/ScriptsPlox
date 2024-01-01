@@ -4,7 +4,7 @@ chcp 65001
 REM Script Name   : ScriptsPlox.bat
 REM Author        : Alplox
 REM Created       : 05-12-2022
-REM Version       : v0.03
+REM Version       : v0.04
 REM Repository    : https://github.com/Alplox/ScriptsPlox
 REM Description   : Batch que contiene utilidades para resolución de problemas comunes en equipos que veo en mi trabajo.
 
@@ -108,7 +108,7 @@ mode con: cols=90 lines=45
 :::       ╔══════════════╗   │[■■■■]o│   ║       Alplox       ║
 :::       ║              ║   ├───────┤   ║                    ║
 :::       ║   Scripts y  ║   │       │   ╚════════╤══╤══════o═╝
-:::       ║ Herramientas ║   │ v0.03 │─────┘  ____│__│____
+:::       ║ Herramientas ║   │ v0.04 │─────┘  ____│__│____
 :::       ║              ║   │       │─┐     /____________\
 :::       ╚══════════════╝   └───────┘ │   ________________
 :::      /::::::::::::::::\            └──/::::::::::::::::\   /T\
@@ -126,7 +126,7 @@ echo             [3] Reparar perfil temporal
 echo             [4] Soluciones problemas directivas dominio
 echo             [5] Limpiar cola impresion-Spooler
 echo             [6] Buscar drivers desde sitios oficiales
-echo             [ ] 
+echo             [7] Solucionar problemas de red
 echo             [8] Ver teles
 echo             [ ] ?
 echo             [0] Reiniciar en inicio avanzado
@@ -134,9 +134,10 @@ echo          __________________________________________________
 echo.
 echo             [A] Abrir administrador de tareas (taskmgr.exe)
 echo             [D] Abrir administrador de dispositivos (devmgmt.msc)
+echo             [R] Abrir adaptadores de red (ncpa.cpl)
 echo             [T] Abrir teclado en pantalla (osk.exe)
 echo.
-echo             [R] Ir a repositorio GitHub (https://github.com/Alplox/ScriptsPlox)
+echo             [G] Ir a repositorio GitHub (https://github.com/Alplox/ScriptsPlox)
 echo          __________________________________________________
 echo.
 echo             [S] Salir
@@ -150,14 +151,15 @@ if %opcion%==3 goto menu-inicio-opcion-3
 if %opcion%==4 goto menu-inicio-opcion-4
 if %opcion%==5 goto menu-inicio-opcion-5
 if %opcion%==6 goto menu-inicio-opcion-6
-
+if %opcion%==7 goto menu-inicio-opcion-7
 if %opcion%==8 goto menu-inicio-opcion-8
 if %opcion%==9 goto menu-inicio-opcion-9
 if %opcion%==0 goto menu-inicio-opcion-0
 if /i "%opcion%"=="A" goto abrir-administrador-de-tareas
 if /i "%opcion%"=="D" goto abrir-administrador-de-dispositivos
+if /i "%opcion%"=="R" goto abrir-adaptadores-de-red
 if /i "%opcion%"=="T" goto abrir-teclado-en-pantalla
-if /i "%opcion%"=="R" goto abrir-repositorio-github
+if /i "%opcion%"=="G" goto abrir-repositorio-github
 if /i "%opcion%"=="S" goto fin
 echo Opción inválida, intenta de nuevo.
 goto menu-inicio
@@ -183,7 +185,7 @@ REM  ██████  ██       ██████ ██  █████
 
 :menu-inicio-opcion-1
 cls
-mode con: cols=190 lines=45
+mode con: cols=190 lines=70
 REM Mostramos la información del equipo en la consola https://stackoverflow.com/a/29026783
 echo --------------Información del equipo -------------- 
 echo Nombre del equipo: %computername%
@@ -204,7 +206,10 @@ whoami
 echo. 
 echo -------------- wmic csproduct -------------- 
 echo. 
-wmic csproduct 
+wmic csproduct
+echo. 
+wmic csproduct get name, identifyingnumber
+
 goto volver-a-menu-inicio
 
 
@@ -227,7 +232,7 @@ echo.
 echo             ////////// Reparar \\\\\\\\\\
 echo             [1] sfc /scannow [Reparar - Archivos OS]
 echo             [2] dism.exe /online /cleanup-image /restorehealth [Reparar - Componentes OS]
-echo             [3] chkdsk /f: [Reparar - Errores Disco Duro]
+echo             [3] chkdsk /f [Reparar - Errores Disco Duro]
 echo.
 echo             ////////// Optimizar \\\\\\\\\\
 echo             [4] defrag C: /V /A [Optimizar - Fragmentación Disco Duro]
@@ -305,7 +310,7 @@ echo.
 echo ¿Reparar errores disco con chkdsk ahora?
 echo.
 set /p answer=Escribe S para sí o N para no:
-if /i "%answer%"=="S" chkdsk /f:
+if /i "%answer%"=="S" chkdsk /f
 goto volver-a-menu-inicio-opcion-2-submenu
 
 :menu-inicio-opcion-2-submenu-opcion-4
@@ -629,8 +634,259 @@ REM ██    ██ ██   ██ ██      ██ ██    ██ ██�
 REM ██    ██ ██████  ██      ██ ██    ██ ██ ██  ██         ██  
 REM ██    ██ ██      ██      ██ ██    ██ ██  ██ ██        ██   
 REM  ██████  ██       ██████ ██  ██████  ██   ████        ██   
-                                                           
-REM aún nada                                                     
+                                                                                                            
+:menu-inicio-opcion-7
+cls
+  REM ipconfig /release: Este comando libera la dirección IP asignada por DHCP (Dynamic Host Configuration Protocol) a la interfaz de red especificada. Esto significa que la dirección IP se devuelve al servidor DHCP y ya no está disponible para el equipo.
+  REM ipconfig /renew: Este comando solicita una nueva dirección IP al servidor DHCP y la asigna a la interfaz de red especificada. Esto es útil cuando la dirección IP que se ha asignado al equipo ya no es válida o ha sido liberada mediante el comando ipconfig /release.
+  REM netsh winsock reset: Este comando restablece la pila de sockets de red (Winsock) a sus valores predeterminados. Esto puede ser útil si hay problemas con la conectividad de red debido a la configuración incorrecta de Winsock.
+  REM netsh int ip reset: Este comando restablece las configuraciones de TCP/IP a sus valores predeterminados. Esto puede ser útil si hay problemas con la conectividad de red debido a la configuración incorrecta de TCP/IP.
+  REM ipconfig /flushdns: Este comando elimina todas las entradas de la caché de DNS (Domain Name System) del equipo. La caché de DNS se utiliza para almacenar temporalmente las traducciones de nombres de dominio a direcciones IP, lo que permite una resolución de nombres más rápida. Al eliminar las entradas de la caché de DNS, se pueden solucionar problemas relacionados con la resolución de nombres.
+  REM ipconfig /registerdns: Este comando fuerza al equipo a registrar su dirección IP y nombre de host en el servidor DNS. Esto es útil si el equipo no está registrado correctamente en el servidor DNS o si se ha cambiado la dirección IP del equipo.
+  REM netsh int tcp set heuristics disabled: Este comando deshabilita el uso de heurísticas (algoritmos basados en la experiencia) para la optimización del rendimiento de TCP. Las heurísticas pueden utilizarse para ajustar automáticamente algunos parámetros de TCP en función del tráfico de red, pero a veces pueden causar problemas de conectividad.
+  REM netsh int tcp set global autotuninglevel=disabled: Este comando deshabilita la autotuning de TCP, que es un mecanismo de optimización de rendimiento de TCP que se utiliza para ajustar automáticamente algunos parámetros de TCP en función del tráfico de red. La autotuning puede ser útil para mejorar el rendimiento de TCP, pero a veces puede causar problemas de conectividad.
+  REM netsh int tcp set global rss=enabled: Este comando habilita la recepción de paquetes simultáneos (RSS, por sus siglas en inglés) para TCP. La recepción de paquetes simultáneos permite que varios procesadores o núcleos de un equipo procesen paquetes de red de forma simultánea, lo que puede mejorar el rendimiento de TCP.
+  REM netsh int tcp show global: Este comando muestra la configuración global de TCP, incluyendo los parámetros de autotuning y heurísticas, y la configuración de recepción de paquetes simultáneos. Esto puede ser útil para ver qué configuraciones están habilitadas o deshabilitadas en el equipo.
+echo       ___________________________________________________________
+echo.
+echo             Bienvenido al submenú para solucionar problemas de red:
+echo.
+echo             ////////// Restablece \\\\\\\\\\
+echo             [1] Ejecutar todos los comandos listados [2-9]
+echo             [2] ipconfig /release y /renew
+echo             [3] netsh winsock reset
+echo             [4] netsh int ip reset
+echo             [5] ipconfig /flushdns y /registerdns
+echo             [6] netsh int tcp set heuristics disabled
+echo             [7] netsh int tcp set global autotuninglevel=disabled
+echo             [8] netsh int tcp set global rss=enabled
+echo             [9] netsh int tcp show global
+echo.
+echo             ////////// Ver datos \\\\\\\\\\
+echo             [0] ipconfig /all
+echo             [01] netstat -a
+echo             [02] arp -a
+echo          __________________________________________________
+echo.
+echo             [R] Abrir adaptadores de red (ncpa.cpl)
+echo             [S] Regresar a menú inicio
+echo       ___________________________________________________________
+echo.   
+set /p opcion=Ingrese el número de la opción deseada:
+if %opcion%==1 goto menu-inicio-opcion-7-submenu-opcion-1
+if %opcion%==2 goto menu-inicio-opcion-7-submenu-opcion-2
+if %opcion%==3 goto menu-inicio-opcion-7-submenu-opcion-3
+if %opcion%==4 goto menu-inicio-opcion-7-submenu-opcion-4
+if %opcion%==5 goto menu-inicio-opcion-7-submenu-opcion-5
+if %opcion%==6 goto menu-inicio-opcion-7-submenu-opcion-6
+if %opcion%==7 goto menu-inicio-opcion-7-submenu-opcion-7
+if %opcion%==8 goto menu-inicio-opcion-7-submenu-opcion-8
+if %opcion%==9 goto menu-inicio-opcion-7-submenu-opcion-9
+if %opcion%==0 goto menu-inicio-opcion-7-submenu-opcion-0
+if %opcion%==01 goto menu-inicio-opcion-7-submenu-opcion-01
+if %opcion%==02 goto menu-inicio-opcion-7-submenu-opcion-02
+if /i "%opcion%"=="R" goto abrir-adaptadores-de-red
+if /i "%opcion%"=="S" goto menu-inicio
+echo Opción inválida, intenta de nuevo.
+goto menu-inicio-opcion-7
+
+
+
+:volver-a-menu-inicio-opcion-7-submenu
+echo. 
+echo -------------- VOLVER A MENU INICIO -------------- 
+echo. 
+echo ¿Volver a Menu Inicio? 
+set /p answer=Escribe S para sí o N para regresar a submenu para solucionar problemas de red:
+if /i "%answer%"=="S" goto menu-inicio
+goto menu-inicio-opcion-7
+
+
+:menu-inicio-opcion-7-submenu-opcion-1
+cls
+echo. 
+echo -------------- Restaurar configuraciones red -------------- 
+echo. 
+echo ¿Ejecutar todos los siguientes comandos ahora?
+echo. 
+echo ipconfig /release
+echo ipconfig /renew
+echo netsh winsock reset
+echo netsh int ip reset
+echo ipconfig /flushdns
+echo ipconfig /registerdns
+echo netsh int tcp set heuristics disabled
+echo netsh int tcp set global autotuninglevel=disabled
+echo netsh int tcp set global rss=enabled
+echo netsh int tcp show global
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" (
+  echo. 
+  echo -------------- ipconfig /release -------------- 
+  echo. 
+  ipconfig /release
+  echo. 
+  echo -------------- ipconfig /renew -------------- 
+  echo.
+  ipconfig /renew
+  echo. 
+  echo -------------- netsh winsock reset -------------- 
+  echo.
+  netsh winsock reset
+  echo. 
+  echo -------------- netsh int ip reset -------------- 
+  echo.
+  netsh int ip reset
+  echo. 
+  echo -------------- ipconfig /flushdns -------------- 
+  echo.
+  ipconfig /flushdns
+  echo. 
+  echo -------------- ipconfig /registerdns -------------- 
+  echo.
+  ipconfig /registerdns
+  echo. 
+  echo -------------- netsh int tcp set heuristics disabled -------------- 
+  echo.
+  netsh int tcp set heuristics disabled
+  echo. 
+  echo -------------- netsh int tcp set global autotuninglevel=disabled -------------- 
+  echo.
+  netsh int tcp set global autotuninglevel=disabled
+  echo. 
+  echo -------------- netsh int tcp set global rss=enabled -------------- 
+  echo.
+  netsh int tcp set global rss=enabled
+  echo. 
+  echo -------------- netsh int tcp show global -------------- 
+  echo.
+  netsh int tcp show global
+  )
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-2
+cls
+echo. 
+echo -------------- ipconfig /release y /renew -------------- 
+echo. 
+echo ¿Ejecutar ipconfig /release y /renew ahora?
+echo. 
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" (
+  echo. 
+  echo -------------- ipconfig /release -------------- 
+  echo. 
+  ipconfig /release
+  echo. 
+  echo -------------- ipconfig /renew -------------- 
+  echo.
+  ipconfig /renew
+  )
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-3
+cls
+echo. 
+echo -------------- netsh winsock reset -------------- 
+echo. 
+echo ¿Ejecutar netsh winsock reset ahora?
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh winsock reset
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-4
+cls
+echo. 
+echo -------------- netsh int ip reset -------------- 
+echo. 
+echo ¿Ejecutar netsh int ip reset ahora?
+echo. 
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh int ip reset
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-5
+cls
+echo. 
+echo -------------- ipconfig /flushdns y /registerdns -------------- 
+echo. 
+echo ¿Ejecutar ipconfig /flushdns y /registerdns ahora?
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" (
+  echo. 
+  echo -------------- ipconfig /flushdns -------------- 
+  echo. 
+  ipconfig /flushdns
+  echo. 
+  echo -------------- ipconfig /registerdns -------------- 
+  echo.
+  ipconfig /registerdns
+  )
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-6
+cls
+echo. 
+echo -------------- netsh int tcp set heuristics disabled -------------- 
+echo. 
+echo ¿Ejecutar netsh int tcp set heuristics disabled ahora?
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh int tcp set heuristics disabled
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-7
+cls
+echo. 
+echo -------------- netsh int tcp set global autotuninglevel=disabled -------------- 
+echo. 
+echo ¿Ejecutar netsh int tcp set global autotuninglevel=disabled ahora?
+echo. 
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh int tcp set global autotuninglevel=disabled
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-8
+cls
+echo. 
+echo -------------- netsh int tcp set global rss=enabled -------------- 
+echo. 
+echo ¿Ejecutar netsh int tcp set global rss=enabled ahora?
+echo. 
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh int tcp set global rss=enabled
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-9
+cls
+echo. 
+echo -------------- netsh int tcp show global -------------- 
+echo. 
+echo ¿Ejecutar netsh int tcp show global ahora?
+echo.
+set /p answer=Escribe S para sí o N para no:
+if /i "%answer%"=="S" netsh int tcp show global
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-0
+cls
+ipconfig /all
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-01
+cls
+netstat -a
+timeout /t 5
+goto volver-a-menu-inicio-opcion-7-submenu
+
+:menu-inicio-opcion-7-submenu-opcion-02
+cls
+arp -a
+goto volver-a-menu-inicio-opcion-7-submenu
 
 
 
@@ -774,6 +1030,10 @@ start devmgmt.msc
 goto menu-inicio
 
 
+
+:abrir-adaptadores-de-red
+start ncpa.cpl
+goto menu-inicio
 
 
 
